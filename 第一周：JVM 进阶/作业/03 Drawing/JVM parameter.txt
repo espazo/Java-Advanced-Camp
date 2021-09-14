@@ -1,0 +1,6 @@
+-Xmx 最大堆内存
+-Xms 初始堆内存
+-Xmn 伊甸区大小
+-XX:MaxMetaspaceSize 元数据空间大小
+-XX:MaxDirectMemorySize 最大堆外内存
+-Xss 线程栈字节数
