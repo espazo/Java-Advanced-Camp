@@ -2,13 +2,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelloClassLoader extends ClassLoader {
     public static void main(String[] args) throws Exception {
+
+        String className = "Hello";
+        String methodName = "hello";
+
+        Class<?> clazz = new HelloClassLoader().findClass(className);
         // run in JDK 11
-        new HelloClassLoader().findClass("Hello").getDeclaredConstructor().newInstance();
+        Object object = clazz.getDeclaredConstructor().newInstance();
+        Method method = clazz.getMethod(methodName);
+        method.invoke(object);
     }
 
     @Override
@@ -30,6 +38,8 @@ public class HelloClassLoader extends ClassLoader {
                 byte temp = (byte) (255 - b);
                 list.add(temp);
             }
+
+            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
